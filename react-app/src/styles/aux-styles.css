@@ -1,0 +1,16 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; 
+}
+
+.content {
+  position: relative; 
+  z-index: 9999; 
+  color: white; 
+}
+
+.leaflet-container {
+  background-color: #e9ecef;
+}
+

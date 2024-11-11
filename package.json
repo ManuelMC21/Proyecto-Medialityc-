@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "vite-plugin-svgr": "^4.3.0"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "react-leaflet": "^4.2.1"
+  }
+}
