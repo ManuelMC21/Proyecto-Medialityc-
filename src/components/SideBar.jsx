@@ -1,4 +1,6 @@
 import '../styles/side-bar.css'
+import { restaurantes } from '../data/data.js'
+
 
 function SideBar({children}){
   return(
@@ -15,11 +17,38 @@ export default SideBar;
 
 function SearchResultsWindow(){
   return(
-    <SideBarWindow
-      title="Results"
-    >
-      
+    <SideBarWindow title="Resultados">
+      <SearchContainer/>   
     </SideBarWindow>
+  );
+}
+
+function SearchContainer(){
+  return(
+    <div className="search-container">
+      {restaurantes.map((restaurante, index) => (
+        <RestaurantContainer
+          key={index}
+          restaurant={restaurante}
+        />
+      ))}
+  </div>
+);
+  
+}
+function RestaurantContainer({restaurant }){
+  return(
+    <div className="restaurant-container">
+      <div className="rest-image-container">
+        <img className="rest-image" src={restaurant.image} />
+      </div>
+      <div className="rest-info">
+        <h2>{restaurant.name}</h2>
+        <p><strong>Address:</strong> {restaurant.address}</p>
+        <p><strong>Stars:</strong> {restaurant.stars}</p>
+      </div>
+      
+    </div>
   );
 }
 

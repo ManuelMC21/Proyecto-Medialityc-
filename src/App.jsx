@@ -1,6 +1,6 @@
 import SupBar from './components/SupBar.jsx'
 import SearchBar from './components/SearchBar.jsx'
-import Map from './components/Map.jsx'
+import Map from './components/SearchBar.jsx'
 import SideBar from './components/SideBar.jsx'
 import './styles/aux-styles.css'
 

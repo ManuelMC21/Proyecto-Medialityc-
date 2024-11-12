@@ -1,91 +1,89 @@
-// datos.js
-import { TiposDeCocina, Etiquetas, Servicios } from './enums';
-
-const restaurantes = [
+export const restaurantes = [
   {
-    nombre: "Restaurante A",
-    foto: "https://placehold.jp/30x30.png",
-    horario: "9 AM - 10 PM",
-    calificacion: 4.5,
-    direccion: "Calle Falsa 123, Ciudad",
-    telefono: "123-456-7890",
-    tipoDeCocina: TiposDeCocina.ITALIANA,
-    precioPromedio: "$$$",
-    descripcion: "Un delicioso restaurante italiano con un ambiente acogedor.",
-    sitioWeb: "https://restaurantea.com",
-    capacidad: 50,
-    serviciosOfrecidos: [Servicios.COMIDA_LLEVAR, Servicios.RESERVAS],
-    caracteristicasEspeciales: ["Accesibilidad para discapacitados"],
-    etiquetas: [Etiquetas.ROMANTICO, Etiquetas.FAMILIAR],
-    opiniones: [
-      { usuario: "Juan", comentario: "Excelente comida y servicio." },
-      { usuario: "Maria", comentario: "El ambiente es muy agradable." },
-    ],
-    promocionesEspeciales: ["10% de descuento los martes"],
+      name: "Lo De Monik",
+      image: 'src/assets/rest1.2.jpg',
+      hours: {
+          Monday: { openingTime: "11 AM", closingTime: "11 PM" },
+          Tuesday: { openingTime: "11 AM", closingTime: "11 PM" },
+          Wednesday: { openingTime: "11 AM", closingTime: "11 PM" },
+          Thursday: { openingTime: "11 AM", closingTime: "11 PM" },
+          Friday: { openingTime: "11 AM", closingTime: "12 AM" }, // Abierto hasta medianoche
+          Saturday: { openingTime: "10 AM", closingTime: "12 AM" }, // Abre más temprano
+          Sunday: { openingTime: "10 AM", closingTime: "11 PM" } // Abre más temprano
+      },
+      stars: 48,
+      address: "4JRV+FQ5, Chacon y, Compostela, La Habana",
+      phone: "(07) 8644029"
   },
   {
-    nombre: "Restaurante B",
-    foto: "https://placehold.jp/30x30.png",
-    horario: "10 AM - 11 PM",
-    calificacion: 4.0,
-    direccion: "Avenida Principal 456, Ciudad",
-    telefono: "234-567-8901",
-    tipoDeCocina: TiposDeCocina.MEXICANA,
-    precioPromedio: "$$",
-    descripcion: "Auténtica comida mexicana con un toque moderno.",
-    sitioWeb: "https://restauranteb.com",
-    capacidad: 80,
-    serviciosOfrecidos: [Servicios.RESERVAS, Servicios.ENTREGA_DOMICILIO],
-    caracteristicasEspeciales: ["Terraza al aire libre"],
-    etiquetas: [Etiquetas.FAMILIAR, Etiquetas.RÁPIDO],
-    opiniones: [
-      { usuario: "Carlos", comentario: "Los tacos son increíbles." },
-      { usuario: "Ana", comentario: "Un lugar perfecto para cenar en familia." },
-    ],
-    promocionesEspeciales: ["2x1 en cervezas los jueves"],
+      name: "Paladar Doña Eutimia",
+      image: 'src/assets/rest1.jpg',
+      hours: {
+          Monday: { openingTime: "12 PM", closingTime: "10 PM" },
+          Tuesday: { openingTime: "12 PM", closingTime: "10 PM" },
+          Wednesday: { openingTime: "12 PM", closingTime: "10 PM" },
+          Thursday: { openingTime: "12 PM", closingTime: "10 PM" },
+          Friday: { openingTime: "12 PM", closingTime: "11 PM" }, // Abierto hasta las 11 PM
+          Saturday: { openingTime: "12 PM", closingTime: "11 PM" },
+          Sunday: { openingTime: null, closingTime:null } // Cerrado
+      },
+      stars: 44, // Estrellas añadidas
+      address:"60-C, Callejon del Chorro, La Habana",
+      phone:"(07) 8013332",
+      services:["Outdoor seating"]
   },
   {
-    nombre: "Restaurante C",
-    foto: "https://placehold.jp/30x30.png",
-    horario: "8 AM - 9 PM",
-    calificacion: 4.8,
-    direccion: "Calle Secundaria 789, Ciudad",
-    telefono: "345-678-9012",
-    tipoDeCocina: TiposDeCocina.JAPONESA,
-    precioPromedio: "$$$$",
-    descripcion: "Sushi fresco y auténtico en un ambiente elegante.",
-    sitioWeb: "https://restaurantec.com",
-    capacidad: 60,
-    serviciosOfrecidos: [Servicios.COMIDA_LLEVAR],
-    caracteristicasEspeciales: ["Ambiente romántico"],
-    etiquetas: [Etiquetas.ROMANTICO, Etiquetas.NEGOCIOS],
-    opiniones: [
-      { usuario: "Luis", comentario: "El mejor sushi que he probado." },
-      { usuario: "Sofia", comentario: "Ideal para una cena especial." },
-    ],
-    promocionesEspeciales: ["Descuento del 15% para parejas los viernes"],
+      name:"Sibarita Habana",
+      image: 'src/assets/rest1.3.jpg',
+      hours:{
+          Monday:{openingTime:"1 PM", closingTime:"10 PM"},
+          Tuesday:{openingTime:"1 PM", closingTime:"10 PM"},
+          Wednesday:{openingTime:"1 PM", closingTime:"10 PM"},
+          Thursday:{openingTime:"1 PM", closingTime:"10 PM"},
+          Friday:{openingTime:"1 PM", closingTime:"11 PM"},
+          Saturday:{openingTime:"1 PM", closingTime:"11 PM"},
+          Sunday:{openingTime:null, closingTime:null} // Cerrado
+      },
+      stars: 45, // Estrellas añadidas
+      services:["Good cocktails"],
+      address:"528 O'Reilly, La Habana",
+      phone:"05 2670512"
   },
   {
-    nombre: "Restaurante D",
-    foto: "https://placehold.jp/30x30.png",
-    horario: "11 AM - 10 PM",
-    calificacion: 3.5,
-    direccion: "Boulevard de la Libertad, Ciudad",
-    telefono: "456-789-0123",
-    tipoDeCocina: TiposDeCocina.AMERICANA,
-    precioPromedio: "$$",
-    descripcion: "Comida americana clásica con un ambiente casual.",
-    sitioWeb: "https://restauranted.com",
-    capacidad: 100,
-    serviciosOfrecidos: [Servicios.ENTREGA_DOMICILIO, Servicios.RESERVAS],
-    caracteristicasEspeciales: ["Ideal para grupos grandes"],
-    etiquetas: [Etiquetas.FAMILIAR],
-    opiniones: [
-      { usuario: "Pedro", comentario: "Las hamburguesas son deliciosas." },
-      { usuario: "Laura", comentario: "Un buen lugar para ver deportes." },
-    ],
-    promocionesEspeciales: ["Descuentos en comidas familiares los domingos"],
+      name:"El Rincón de la Abuela",
+      image: 'src/assets/rest3.jpg',
+      hours:{
+          Monday:{openingTime:null, closingTime:null}, // Cerrado
+          Tuesday:{openingTime:"12 PM", closingTime:"10 PM"},
+          Wednesday:{openingTime:"12 PM", closingTime:"10 PM"},
+          Thursday:{openingTime:"12 PM", closingTime:"10 PM"},
+          Friday:{openingTime:"12 PM", closingTime:"10 PM"},
+          Saturday:{openingTime:"12 PM", closingTime:"10 PM"},
+          Sunday:{openingTime:null, closingTime:null} // Cerrado
+      },
+      stars: 45,
+      address:"123 Calle de la Paz, La Habana",
+      phone:"(07) 1234567",
+      services:["Home delivery","Takeout"]
   },
+  {
+      name:"Café de la Plaza",
+      image: 'src/assets/rest4.jpg',
+      hours:{
+          Monday:{openingTime:"8 AM", closingTime:"8 PM"},
+          Tuesday:{openingTime:"8 AM", closingTime:"8 PM"},
+          Wednesday:{openingTime:"8 AM", closingTime:"8 PM"},
+          Thursday:{openingTime:"8 AM", closingTime:"8 PM"},
+          Friday:{openingTime:"8 AM", closingTime:"9 PM"}, // Abierto hasta las 9PM
+          Saturday:{openingTime:"8 AM", closingTime:"9 PM"},
+          Sunday:{openingTime:null, closingTime:null} // Cerrado
+      },
+      stars: 50,
+      address:"Plaza Vieja, La Habana",
+      phone:"(07) 7654321",
+      services:["Free Wi-Fi","Breakfast"]
+  }
 ];
+
 
 export default restaurantes;
