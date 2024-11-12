@@ -2,6 +2,7 @@ export const restaurantes = [
   {
       name: "Lo De Monik",
       image: 'src/assets/rest1.2.jpg',
+      exampleImages: ['src/assets/rest3.jpg', 'src/assets/rest1.jpg'],
       hours: {
           Monday: { openingTime: "11 AM", closingTime: "11 PM" },
           Tuesday: { openingTime: "11 AM", closingTime: "11 PM" },
@@ -18,6 +19,7 @@ export const restaurantes = [
   {
       name: "Paladar Doña Eutimia",
       image: 'src/assets/rest1.jpg',
+      exampleImages: ['src/assets/rest3.jpg', 'src/assets/rest1.jpg'],
       hours: {
           Monday: { openingTime: "12 PM", closingTime: "10 PM" },
           Tuesday: { openingTime: "12 PM", closingTime: "10 PM" },
@@ -30,7 +32,7 @@ export const restaurantes = [
       stars: 44, // Estrellas añadidas
       address:"60-C, Callejon del Chorro, La Habana",
       phone:"(07) 8013332",
-      services:["Outdoor seating"]
+      services:["Outdoor seating","Good cocktails"]
   },
   {
       name:"Sibarita Habana",

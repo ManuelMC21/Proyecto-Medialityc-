@@ -1,4 +1,5 @@
 import '../styles/side-bar.css'
+import '../styles/aux-styles.css'
 import { restaurantes } from '../data/data.js'
 
 
@@ -39,7 +40,7 @@ function SearchContainer(){
 function RestaurantContainer({restaurant }){
   return(
     <div className="restaurant-container">
-      <div className="rest-image-container">
+      <div className="rest-image-container basic-image-container">
         <img className="rest-image" src={restaurant.image} />
       </div>
       <div className="rest-info">
