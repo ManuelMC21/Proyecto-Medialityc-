@@ -1,10 +1,10 @@
 import '../styles/more-info-window.css'
 import '../styles/side-bar.css'
 import '../styles/aux-styles.css'
+import ExampleImageComp from './ImageComp.jsx';
 
 function MoreInfoWindow({place}){
   return(
-    //Mejorar el codigo de las imagenes
     <div className="more-info-window-container">
       <div className="more-info-window">
         <div className="basic-info-container">
@@ -13,12 +13,9 @@ function MoreInfoWindow({place}){
             <div className="basic-image-container main-image">
             <img src={place.image} className="rest-image"/>
             </div>
-            <div className="basic-image-container example-image">
-            <img src={place.exampleImages[0]} className="rest-image"/>
-            </div>
-            <div className="basic-image-container example-image">
-              <img src={place.exampleImages[1]} className="rest-image"/>
-            </div>
+            {place.exampleImages && place.exampleImages.map((image, index) => (
+              <ExampleImageComp key={index} source={image} />
+            ))}
           </div>
           
         </div>

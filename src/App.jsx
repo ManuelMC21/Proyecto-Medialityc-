@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import SupBar from './components/SupBar.jsx'
 import SearchBar from './components/SearchBar.jsx'
 import Map from './components/Map.jsx'
@@ -7,17 +8,19 @@ import './styles/aux-styles.css'
 import { restaurantes } from './data/data.js'
 
 function App() {
+  const [selectedPlace, setSelectedPlace] = useState(null);
+
   return (
     <>
       <Map />
       <div className="content">
         <SupBar />
-        <SideBar>
+        <SideBar setSelectedPlace={setSelectedPlace}>
           <SearchBar />
         </SideBar> 
-        <MoreInfoWindow
-        place={restaurantes[1]}
-        />
+        {selectedPlace && (
+          <MoreInfoWindow place={selectedPlace} />
+        )}
       </div>
     </>
   )

@@ -3,12 +3,12 @@ import '../styles/aux-styles.css'
 import { restaurantes } from '../data/data.js'
 
 
-function SideBar({children}){
+function SideBar({children, setSelectedPlace }){
   return(
     <div className="side-bar">
       {children}
       {/*<Welcome/>*/}
-      <SearchResultsWindow/>
+      <SearchResultsWindow setSelectedPlace={setSelectedPlace}/>
     </div>
   
   );
@@ -16,30 +16,31 @@ function SideBar({children}){
 
 export default SideBar;
 
-function SearchResultsWindow(){
+function SearchResultsWindow({ setSelectedPlace }){
   return(
     <SideBarWindow title="Resultados">
-      <SearchContainer/>   
+      <SearchContainer setSelectedPlace={setSelectedPlace}/>   
     </SideBarWindow>
   );
 }
 
-function SearchContainer(){
+function SearchContainer({ setSelectedPlace }){
   return(
     <div className="search-container">
       {restaurantes.map((restaurante, index) => (
         <RestaurantContainer
           key={index}
           restaurant={restaurante}
+          onClick={() => setSelectedPlace(restaurante)}
         />
       ))}
   </div>
 );
   
 }
-function RestaurantContainer({restaurant }){
+function RestaurantContainer({restaurant, onClick  }){
   return(
-    <div className="restaurant-container">
+    <div className="restaurant-container" onClick={onClick}>
       <div className="rest-image-container basic-image-container">
         <img className="rest-image" src={restaurant.image} />
       </div>

@@ -1,5 +1,6 @@
 export const restaurantes = [
   {
+    id: 1,
       name: "Lo De Monik",
       image: 'src/assets/rest1.2.jpg',
       exampleImages: ['src/assets/rest3.jpg', 'src/assets/rest1.jpg'],
@@ -17,6 +18,7 @@ export const restaurantes = [
       phone: "(07) 8644029"
   },
   {
+    id: 2,
       name: "Paladar Doña Eutimia",
       image: 'src/assets/rest1.jpg',
       exampleImages: ['src/assets/rest3.jpg', 'src/assets/rest1.jpg'],
@@ -35,6 +37,7 @@ export const restaurantes = [
       services:["Outdoor seating","Good cocktails"]
   },
   {
+    id: 3,
       name:"Sibarita Habana",
       image: 'src/assets/rest1.3.jpg',
       hours:{
@@ -52,6 +55,7 @@ export const restaurantes = [
       phone:"05 2670512"
   },
   {
+    id: 4,
       name:"El Rincón de la Abuela",
       image: 'src/assets/rest3.jpg',
       hours:{
@@ -69,6 +73,7 @@ export const restaurantes = [
       services:["Home delivery","Takeout"]
   },
   {
+    id: 5,
       name:"Café de la Plaza",
       image: 'src/assets/rest4.jpg',
       hours:{
