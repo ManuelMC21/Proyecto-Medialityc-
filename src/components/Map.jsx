@@ -19,9 +19,6 @@ function Map() {
 
     const [markers, setMarkers] = useState([]);
 
-    const handleMapClick = (e) => {
-      addMarker();
-    };
 
     const handleRightClick = (e) => {
       setRightClickPosition(e.latlng);
@@ -48,7 +45,6 @@ function Map() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
             <MapEventsHandler 
-                handleMapClick={handleMapClick}
                 handleRightClick= {handleRightClick} 
             />
             <PopupMenu 
@@ -71,7 +67,6 @@ function Map() {
 
 const MapEventsHandler = ({ handleMapClick, handleRightClick}) => {
   const map = useMapEvents({
-      click: handleMapClick,
       contextmenu: handleRightClick,
 
   });
@@ -124,7 +119,7 @@ const PopupMenu = ({action1, action2}) => {
                     setVisible(false);
                     }}>Añadir Lugar</button>
                   <button onClick={() => {
-
+                    action2();
                     setVisible(false);
                     }}>Dibujar figura</button>
               </div>
