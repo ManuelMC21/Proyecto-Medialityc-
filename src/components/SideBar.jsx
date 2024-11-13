@@ -8,7 +8,8 @@ function SideBar({children, setSelectedPlace }){
     <div className="side-bar">
       {children}
       {/*<Welcome/>*/}
-      <SearchResultsWindow setSelectedPlace={setSelectedPlace}/>
+      <SearchResultsWindow>
+      <SearchContainer setSelectedPlace={setSelectedPlace}/> </SearchResultsWindow>
     </div>
   
   );
@@ -16,31 +17,36 @@ function SideBar({children, setSelectedPlace }){
 
 export default SideBar;
 
-function SearchResultsWindow({ setSelectedPlace }){
+function SearchResultsWindow({ children }){
   return(
     <SideBarWindow title="Resultados">
-      <SearchContainer setSelectedPlace={setSelectedPlace}/>   
+        {children}
     </SideBarWindow>
   );
 }
 
 function SearchContainer({ setSelectedPlace }){
+  const onClick = (restaurant) => setSelectedPlace(restaurant);
+
   return(
     <div className="search-container">
-      {restaurantes.map((restaurante, index) => (
+      {restaurantes.map((restaurant, index) => (
         <RestaurantContainer
-          key={index}
-          restaurant={restaurante}
-          onClick={() => setSelectedPlace(restaurante)}
+          key={restaurant.id}
+          restaurant={restaurant}
+          onClick={() => onClick(restaurant)} 
+          
         />
       ))}
   </div>
 );
   
 }
-function RestaurantContainer({restaurant, onClick  }){
+function RestaurantContainer({restaurant, onClick}){
   return(
+    
     <div className="restaurant-container" onClick={onClick}>
+      
       <div className="rest-image-container basic-image-container">
         <img className="rest-image" src={restaurant.image} />
       </div>

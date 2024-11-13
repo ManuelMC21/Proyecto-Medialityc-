@@ -3,10 +3,11 @@ import '../styles/side-bar.css'
 import '../styles/aux-styles.css'
 import ExampleImageComp from './ImageComp.jsx';
 
-function MoreInfoWindow({place}){
+function MoreInfoWindow({place, setSelectedPlace}){
   return(
     <div className="more-info-window-container">
       <div className="more-info-window">
+        <button className="close-button " onClick={() => setSelectedPlace(null)}>X</button>
         <div className="basic-info-container">
           <h1>{place.name}</h1>
           <div className="image-carousel">

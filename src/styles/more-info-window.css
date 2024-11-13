@@ -83,3 +83,9 @@
   color: #0d7af6;
   border-color: #0d7af6;
 }
+
+.more-info-window-container .close-button{
+  position: absolute;
+  right: 5px;
+  top: 5px
+}
