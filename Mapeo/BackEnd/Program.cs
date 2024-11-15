@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,14 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-/*builder.Services.AddControllers().AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new GeometryJsonConverter());
-    });*/
 builder.Services.AddDbContext<AppDbContext>(options =>
     {
-        options.UseNpgsql("Host=localhost;Port=5432;Database=Medialityc;User Id=postgres;Password=manu04");
+        options.UseNpgsql(
+            "Host=localhost;Port=5432;Database=Medialityc;User Id=postgres;Password=manu04",
+            o => o.UseNetTopologySuite()
+        );
     });
 
 
@@ -29,12 +29,24 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/Restaurants/", async (Restaurant r, AppDbContext db) =>
+app.MapPost("/Restaurants/", async (RestaurantDto dto, AppDbContext db) =>
 {
-    db.Restaurants.Add(r);
+    var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+    var Location = geometryFactory.CreatePoint(new Coordinate(dto.longitude, dto.latitude));
+
+    var restaurant = new Restaurant
+    {
+        name = dto.name,
+        phone = dto.phone,
+        location = Location,
+        type = dto.type,
+        description = dto.description
+    };
+
+    db.Restaurants.Add(restaurant);
     await db.SaveChangesAsync();
 
-    return Results.Created($"/Restaurant/{r.id}", r);
+    return Results.Created($"/Restaurant/{restaurant.id}", restaurant);
 
 });
 

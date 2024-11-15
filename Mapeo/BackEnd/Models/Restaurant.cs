@@ -8,7 +8,7 @@ public class Restaurant
     public string name { get; set; }
     public string? phone { get; set; }
     [JsonIgnore]
-    public Point? location { get; set; }
+    public Geometry location { get; set; }
     public string type { get; set; }
     public string? description { get; set; }
 }

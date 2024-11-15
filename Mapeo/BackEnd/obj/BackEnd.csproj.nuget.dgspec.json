@@ -61,6 +61,10 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "NetTopologySuite": {
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
             "NetTopologySuite.IO": {
               "target": "Package",
               "version": "[1.14.0.1, )"

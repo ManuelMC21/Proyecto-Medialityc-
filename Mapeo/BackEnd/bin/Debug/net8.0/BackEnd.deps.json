@@ -12,6 +12,7 @@
           "Microsoft.AspNetCore.OpenApi": "8.0.10",
           "Microsoft.EntityFrameworkCore": "7.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.0",
+          "NetTopologySuite": "2.5.0",
           "NetTopologySuite.IO": "1.14.0.1",
           "Newtonsoft.Json": "13.0.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.0",

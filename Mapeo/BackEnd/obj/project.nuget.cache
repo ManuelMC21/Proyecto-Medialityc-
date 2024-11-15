@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CGwr5UD/YrM=",
+  "dgSpecHash": "aM/IUI5IhmM=",
   "success": true,
   "projectFilePath": "C:\\Users\\Manuel Montero\\Documents\\GitHub\\Proyecto-Medialityc-\\Mapeo\\BackEnd\\BackEnd.csproj",
   "expectedPackageFiles": [
@@ -100,13 +100,13 @@
       "code": "NU1900",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
+      "message": "Error al obtener los datos de vulnerabilidad del paquete: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json."
     },
     {
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'NetTopologySuite.IO 1.14.0.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "message": "El paquete \"NetTopologySuite.IO 1.14.0.1\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \"net8.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "NetTopologySuite.IO",
       "targetGraphs": [
         "net8.0"
