@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackEnd.Migrations
 {
     /// <inheritdoc />
-    public partial class MedialitycMigration1 : Migration
+    public partial class migration1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,17 +19,17 @@ namespace BackEnd.Migrations
                 name: "Restaurants",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Phone = table.Column<string>(type: "text", nullable: true),
-                    location = table.Column<Point>(type: "geometry", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    phone = table.Column<string>(type: "text", nullable: true),
+                    location = table.Column<Point>(type: "geometry", nullable: true),
                     type = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Restaurants", x => x.Id);
+                    table.PrimaryKey("PK_Restaurants", x => x.id);
                 });
         }
 

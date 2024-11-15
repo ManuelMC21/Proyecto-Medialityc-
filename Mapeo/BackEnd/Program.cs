@@ -1,6 +1,4 @@
-using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
-using NetTopologySuite.Geometries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,33 +34,48 @@ app.MapPost("/Restaurants/", async (Restaurant r, AppDbContext db) =>
     db.Restaurants.Add(r);
     await db.SaveChangesAsync();
 
-    return Results.Created($"/Restaurant/{r.Id}", r);
+    return Results.Created($"/Restaurant/{r.id}", r);
 
 });
 
-/*app.MapGet("/Restaurants/{location:Point}", async (NetTopologySuite.Geometries.Geometry point, AppDbContext db) =>
+app.MapGet("/Restaurants/{name}", async (string name, AppDbContext db) =>
 {
-    return await db.Restaurants.FindAsync(point)
+    var listaRestaurant = await db.Restaurants.Where(r => r.name.Contains(name)).ToListAsync();
+    if (listaRestaurant is null)
+    {
+        return Results.NotFound();
+    }
+    else
+    {
+        return Results.Ok(listaRestaurant);
+    }
+});
+
+app.MapGet("/Restaurants/{id:int}", async (int id, AppDbContext db) =>
+{
+    return await db.Restaurants.FindAsync(id)
     is Restaurant r
     ? Results.Ok(r)
     : Results.NotFound();
 
-});*/
+});
 
 app.MapGet("/Restaurants", async (AppDbContext db) => await db.Restaurants.ToListAsync());
 
 app.MapPut("/Restaurants/{id:int}", async (int id, Restaurant r, AppDbContext db) =>
 {
-    if (r.Id != id)
+    if (r.id != id)
         return Results.BadRequest();
 
     var restaurant = await db.Restaurants.FindAsync(id);
 
     if (restaurant is null) return Results.NotFound();
 
-    restaurant.Id = r.Id;
-    restaurant.Name = r.Name;
-    restaurant.Phone = r.Phone;
+    restaurant.id = r.id;
+    restaurant.name = r.name;
+    restaurant.phone = r.phone;
+    restaurant.type = r.type;
+    restaurant.description = r.description;
 
     await db.SaveChangesAsync();
 
