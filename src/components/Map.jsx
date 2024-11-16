@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents, FeatureGroup} fro
 import 'leaflet/dist/leaflet.css';
 
 import '../styles/map-styles.css'
+import L from 'leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -13,7 +14,7 @@ L.Icon.Default.mergeOptions({
     iconUrl: markerIcon,
     shadowUrl: markerShadow,
 });
-function Map() {
+function Map({setFormOpened}) {
     const [position, setPosition] = useState([23.065709745023, -82.375883838068]);
     const [rightClickPosition, setRightClickPosition] = useState([23.065709745023, -82.375883838068]); 
 
@@ -27,6 +28,11 @@ function Map() {
   const handleOption2 = () => {
       alert('Waos');
   };
+
+  const handleOption1 = () => {
+    setFormOpened(true);
+    addMarker();
+};
 
   const addMarker = () => {
     const newMarkerPosition = rightClickPosition;
@@ -48,7 +54,7 @@ function Map() {
                 handleRightClick= {handleRightClick} 
             />
             <PopupMenu 
-            action1={addMarker} 
+            action1={handleOption1} 
             action2={handleOption2} />
 
             <FeatureGroup>
