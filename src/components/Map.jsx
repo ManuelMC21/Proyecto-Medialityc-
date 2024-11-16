@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents, FeatureGroup} fro
 import 'leaflet/dist/leaflet.css';
 
 import '../styles/map-styles.css'
+import L from 'leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -13,15 +14,12 @@ L.Icon.Default.mergeOptions({
     iconUrl: markerIcon,
     shadowUrl: markerShadow,
 });
-function Map() {
+function Map({setFormOpened}) {
     const [position, setPosition] = useState([23.065709745023, -82.375883838068]);
     const [rightClickPosition, setRightClickPosition] = useState([23.065709745023, -82.375883838068]); 
 
     const [markers, setMarkers] = useState([]);
 
-    const handleMapClick = (e) => {
-      addMarker();
-    };
 
     const handleRightClick = (e) => {
       setRightClickPosition(e.latlng);
@@ -30,6 +28,11 @@ function Map() {
   const handleOption2 = () => {
       alert('Waos');
   };
+
+  const handleOption1 = () => {
+    setFormOpened(true);
+    addMarker();
+};
 
   const addMarker = () => {
     const newMarkerPosition = rightClickPosition;
@@ -48,11 +51,10 @@ function Map() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
             <MapEventsHandler 
-                handleMapClick={handleMapClick}
                 handleRightClick= {handleRightClick} 
             />
             <PopupMenu 
-            action1={addMarker} 
+            action1={handleOption1} 
             action2={handleOption2} />
 
             <FeatureGroup>
@@ -71,7 +73,6 @@ function Map() {
 
 const MapEventsHandler = ({ handleMapClick, handleRightClick}) => {
   const map = useMapEvents({
-      click: handleMapClick,
       contextmenu: handleRightClick,
 
   });
@@ -124,7 +125,7 @@ const PopupMenu = ({action1, action2}) => {
                     setVisible(false);
                     }}>Añadir Lugar</button>
                   <button onClick={() => {
-
+                    action2();
                     setVisible(false);
                     }}>Dibujar figura</button>
               </div>
