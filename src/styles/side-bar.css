@@ -38,19 +38,6 @@
   padding-right: 5px;
 }
 
-.close-button{
-  background-color: transparent;
-  height: 40px;
-  width: 40px;
-  border: none;
-  color: darkgray;
-  font-size: 24px;
-}
-
-.close-button:hover{
-  color: black;
-  
-}
 
 
 .restaurant-container {
@@ -59,6 +46,7 @@
   display: flex;
   flex-direction: row;
   padding: 20px 10px;
+  cursor: pointer;
 }
 
 

@@ -3666,19 +3666,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Manuel Montero\\.nuget\\packages\\": {}
+    "C:\\Users\\mabel\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Manuel Montero\\Documents\\GitHub\\Proyecto-Medialityc-\\Mapeo\\BackEnd\\BackEnd.csproj",
+      "projectUniqueName": "C:\\Users\\mabel\\Documents\\GitHub\\Proyecto-Medialityc-\\Mapeo\\BackEnd\\BackEnd.csproj",
       "projectName": "BackEnd",
-      "projectPath": "C:\\Users\\Manuel Montero\\Documents\\GitHub\\Proyecto-Medialityc-\\Mapeo\\BackEnd\\BackEnd.csproj",
-      "packagesPath": "C:\\Users\\Manuel Montero\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Manuel Montero\\Documents\\GitHub\\Proyecto-Medialityc-\\Mapeo\\BackEnd\\obj\\",
+      "projectPath": "C:\\Users\\mabel\\Documents\\GitHub\\Proyecto-Medialityc-\\Mapeo\\BackEnd\\BackEnd.csproj",
+      "packagesPath": "C:\\Users\\mabel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mabel\\Documents\\GitHub\\Proyecto-Medialityc-\\Mapeo\\BackEnd\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Manuel Montero\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\mabel\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -3765,17 +3765,11 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
   "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
-    },
     {
       "code": "NU1701",
       "level": "Warning",
