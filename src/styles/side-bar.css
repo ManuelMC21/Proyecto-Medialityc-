@@ -7,9 +7,6 @@
   background-color: #e9ecef;
   display: flex;
   flex-direction: column;
-  
-
-  
   font-weight: 300;
 }
 
@@ -19,6 +16,7 @@
   box-sizing: border-box;
   padding-top: 10px;
   padding-bottom: 20px;
+
   
 }
 .side-bar-window h1{
@@ -29,16 +27,20 @@
 
 .window-header{
   width: 100%;
-  height: 50px;
+  height: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   box-sizing: border-box;
   padding-left: 15px;
   padding-right: 5px;
+  margin-bottom: 14px;
 }
 
-
+.welcome-text{
+  padding: 0px 16px;
+  margin-bottom: 16px;
+}
 
 .restaurant-container {
   box-sizing: border-box;

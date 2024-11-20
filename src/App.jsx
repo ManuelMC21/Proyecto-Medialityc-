@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import SupBar from './components/SupBar.jsx'
-
 import Map from './components/Map.jsx'
 import SideBar from './components/SideBar.jsx'
 import MoreInfoWindow from './components/MoreInfoWindow.jsx'
@@ -13,7 +12,7 @@ import { Overlay } from './components/MiniComponents.jsx';
 
 function App() {
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [formOpened, setFormOpened] = useState(true);
+  const [formOpened, setFormOpened] = useState(false);
 
 
   return (
@@ -32,7 +31,7 @@ function App() {
             setSelectedPlace={setSelectedPlace} />
         )}
 
-        {formOpened && (<Overlay><Formulary setFormOpened={setFormOpened}/></Overlay>)}
+        {formOpened && (<Overlay><Formulary setFormOpened={setFormOpened} /></Overlay>)}
 
       </div>
     </>

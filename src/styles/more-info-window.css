@@ -2,8 +2,7 @@
   background-color: white;
   width: 380px;
   border-radius: 15px;
-
-  margin-bottom: 30px;
+  margin-bottom: 100px;
   box-sizing: border-box;
   padding-left: 18px;
   padding-right: 18px;
@@ -13,14 +12,16 @@
 }
 
 .more-info-window-container{
-  height: fit-content;
+
+  height: 100%;
   overflow: auto;
-  position: absolute;
+  position: fixed;
   
   background-color: transparent;
 
   top: 70px;
   left: 350px;
+  
   margin-left: 20px;
   
 }

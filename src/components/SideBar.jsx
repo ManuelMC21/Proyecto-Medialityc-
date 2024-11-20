@@ -72,7 +72,7 @@ function Welcome({setWelcomeVisible}){
     title="Welcome to Open Track!"
     onClick={onClick}
     >
-      <p>OpenStreetMap is a map of the world, created by people like you and free to use under an open license. Hosting is supported by Fastly, OSMF corporate members, and other partners. </p>
+      <p className="welcome-text">OpenStreetMap is a map of the world, created by people like you and free to use under an open license. Hosting is supported by Fastly, OSMF corporate members, and other partners. </p>
     </SideBarWindow>
   )
 }

@@ -42,6 +42,16 @@
   z-index: 10000;
   background-color: white;
 }
+
+.leaflet-circle-marker {
+  cursor: pointer;
+  background-color: white;
+}
+
+.leaflet-circle-marker:hover {
+  cursor:help; /* Cambia a una mano agarrando al arrastrar */
+}
+
  /*
     useEffect(() => {
         if (navigator.geolocation) {
