@@ -2,25 +2,30 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Agregar servicios a la colección.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-/*builder.Services.AddControllers().AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new GeometryJsonConverter());
-    });*/
+// Configurar CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder => builder.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
+
+// Agregar DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
-    {
-        options.UseNpgsql("Host=localhost;Port=5432;Database=Medialityc;User Id=postgres;Password=manu04");
-    });
-
-
+{
+    options.UseNpgsql("Host=localhost;Port=5432;Database=Medialityc;User Id=postgres;Password=manu04");
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Aplicar la política de CORS
+app.UseCors("AllowAll");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -29,35 +34,23 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Definición de las rutas
 app.MapPost("/Restaurants/", async (Restaurant r, AppDbContext db) =>
 {
     db.Restaurants.Add(r);
     await db.SaveChangesAsync();
-
     return Results.Created($"/Restaurant/{r.id}", r);
-
 });
 
 app.MapGet("/Restaurants/{name}", async (string name, AppDbContext db) =>
 {
     var listaRestaurant = await db.Restaurants.Where(r => r.name.Contains(name)).ToListAsync();
-    if (listaRestaurant is null)
-    {
-        return Results.NotFound();
-    }
-    else
-    {
-        return Results.Ok(listaRestaurant);
-    }
+    return listaRestaurant.Count == 0 ? Results.NotFound() : Results.Ok(listaRestaurant);
 });
 
 app.MapGet("/Restaurants/{id:int}", async (int id, AppDbContext db) =>
 {
-    return await db.Restaurants.FindAsync(id)
-    is Restaurant r
-    ? Results.Ok(r)
-    : Results.NotFound();
-
+    return await db.Restaurants.FindAsync(id) is Restaurant r ? Results.Ok(r) : Results.NotFound();
 });
 
 app.MapGet("/Restaurants", async (AppDbContext db) => await db.Restaurants.ToListAsync());
@@ -68,7 +61,6 @@ app.MapPut("/Restaurants/{id:int}", async (int id, Restaurant r, AppDbContext db
         return Results.BadRequest();
 
     var restaurant = await db.Restaurants.FindAsync(id);
-
     if (restaurant is null) return Results.NotFound();
 
     restaurant.id = r.id;
@@ -78,9 +70,7 @@ app.MapPut("/Restaurants/{id:int}", async (int id, Restaurant r, AppDbContext db
     restaurant.description = r.description;
 
     await db.SaveChangesAsync();
-
     return Results.Ok(restaurant);
-
 });
 
 app.MapDelete("/Restaurants/{id:int}", async (int id, AppDbContext db) =>
@@ -90,10 +80,11 @@ app.MapDelete("/Restaurants/{id:int}", async (int id, AppDbContext db) =>
 
     db.Restaurants.Remove(restaurant);
     await db.SaveChangesAsync();
-
     return Results.NoContent();
-
 });
+
+// Establecer el puerto para la aplicación
+app.Urls.Add("http://localhost:5000");
 
 app.Run();
 
@@ -101,5 +92,3 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
-
-
