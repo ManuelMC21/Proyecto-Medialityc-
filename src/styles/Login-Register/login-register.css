@@ -1,0 +1,108 @@
+@import '../z-comun/variables.css';
+
+
+body {
+  height: 100vh;
+  
+  overflow: auto;
+
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  
+  background-color: rgba(235, 235, 244, 0.922);
+  
+}
+
+.container{
+  min-width: 750px;
+  width: 80vw;
+  max-width: 850px;
+  
+  height: 80vh;
+  min-height: 500px;
+
+  overflow: hidden;
+  
+  position: relative;
+
+  border-radius: var(--low-radius);
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0.3, 0.3);
+
+  background-image: url(/src/assets/decoration/login-background.jpg);
+  background-size: contain;
+}
+
+.content-container{
+  width: 48%;
+  height: 100%;
+
+  border-top-left-radius: var(--low-radius);
+  border-bottom-left-radius: var(--low-radius);
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: white;
+  box-shadow: -10px 0px 70px rgba(8, 2, 113, 0.312);
+}
+
+.fields{
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 50px;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.title{
+  margin-top: 35px;
+  font-size: var(--big-font-size);
+  color: var(--dark-letter-colorS);
+}
+.button-container { 
+  gap: 14px;
+  padding-bottom: 40px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+}
+
+
+.full-button , .line-button {
+  width: 250px;
+  height: 32px;
+  border-radius: 30px;
+}
+.full-button {
+  border: none;
+  background-color: blue;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.full-button:hover {
+  background-color: rgb(0, 0, 205);
+  transform: scale(1.02); 
+}
+
+.line-button{
+  transition: background-color 0.3s ease, border 0.3s ease, transform 0.3s ease;
+}
+
+.line-button:hover{
+  border: none;
+  color: white;
+  background-color: rgb(0, 0, 205);
+  transform: scale(1.02);
+}

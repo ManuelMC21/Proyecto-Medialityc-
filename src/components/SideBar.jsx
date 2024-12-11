@@ -2,9 +2,7 @@ import '../styles/side-bar.css'
 import '../styles/aux-styles.css'
 import SearchBar from './SearchBar.jsx'
 import React, { useState} from 'react';
-import { restaurantes } from '../data/data.js'
-
-
+ 
 function SideBar({children, setSelectedPlace }){
   const [welcomeVisible, setWelcomeVisible] = useState(true);
   const [searchVisible, setSearchVisible] = useState(true);

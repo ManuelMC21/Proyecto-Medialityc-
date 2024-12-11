@@ -1,0 +1,23 @@
+.left-bar-container{
+  position: fixed;
+  top: var(--top-bar-height);
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: var(--left-bar-width);
+
+  background-color: white;
+}
+
+.options-container{
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
+  overflow: auto;
+  overflow-x: hidden; 
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}

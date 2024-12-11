@@ -1,0 +1,90 @@
+@import '../z-comun/variables.css';
+
+.right-bar{
+  position: fixed;
+  max-height: calc(100% - var(--top-bar-height));
+  top: var(--top-bar-height);
+  right: 0;
+  
+  padding-bottom: 20px;
+  border-bottom-left-radius: var(--low-radius);
+  border-bottom-right-radius: var(--low-radius);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--right-bar-width);
+
+  background-color: white;
+}
+
+.expanded{
+  position: fixed;
+  height: 100%;
+  max-height: calc(100% - var(--top-bar-height));
+  top: var(--top-bar-height);
+  bottom: 0;
+}
+.user-option-container{
+  width: 90%;
+  height: fit-content;
+  min-height: 80px;
+
+  box-sizing: border-box;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  border-radius: var(--low-radius);
+  background-color: rgb(235, 236, 239);
+}
+
+
+.user-option{
+  width: 90%;
+  min-height: 35px;
+
+  box-sizing: border-box;
+  border-radius: var(--low-radius);
+  border: none;
+
+  color: gray;
+
+  background-color: rgb(235, 236, 239);;
+  transition: background-color 0.3s ease, trasnform 0.2s ease, color 0.3s ease;
+}
+
+.user-option:hover{
+  background-color: rgba(210, 210, 215, 0.911);
+  color: rgb(50, 50, 52);
+  transform: scale(1.05);
+}
+
+.extra-info{
+  width: 100%;
+  flex-grow: 1;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+}
+
+.extra-title{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  font-size: var(--big-font-size);
+  padding-left: 20px;
+  box-shadow: 3px 16px 20px rgba(12, 12, 12, 0.118);
+  z-index: 3;
+}
+
+.entity-container2{
+  flex-grow: 1;
+  background-color: white;
+}

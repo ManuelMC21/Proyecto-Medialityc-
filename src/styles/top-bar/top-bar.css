@@ -1,0 +1,54 @@
+@import '../z-comun/variables.css';
+
+.top-bar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: var(--top-bar-height);
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 0px 15px;
+
+  display: flex;
+  justify-content: space-between;
+
+  background-color: white;
+
+  z-index: 1000;
+}
+
+.logo-image{
+  border-radius: 5px;
+}
+
+.part , .initial-buttons, .user-box{
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.web-name{
+  font-size: var(--big-font-size);
+  color: var(--dark-letter-color);
+}
+
+.profile-container{
+  height: 30px;
+  width: 30px;
+
+  overflow: hidden;
+
+  border: 1px;
+  border: solid;
+  border-color: lightgray;
+  border-radius: 30px;
+}
+
+.user-name{
+  color: var(--light-letter-color);
+  font-size: var(--medium-font-size);
+}

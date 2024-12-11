@@ -1,0 +1,57 @@
+
+.field{
+  width: 250px;
+
+  height: 30px;
+
+  border: none;
+  border-bottom: solid;
+  border-width: 2px;
+  border-color: var(--light-letter-color);
+
+  position: relative;
+  display: flex;
+
+  background-color: transparent;
+}
+
+.field-input{
+  height: 100%;
+  flex-grow: 1;
+  padding: 0px;
+
+  border: none;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+.field-input:focus {
+  outline: none;
+}
+
+.floating-label{
+  font-size: var(--medium-font-size);
+  color: var(--light-letter-color);
+}
+
+.field-input:not(:placeholder-shown) + .floating-label,
+.field-input:focus + .floating-label {
+    transform: translateY(-25px); 
+    font-size: var(--small-font-size);
+    color: blue; 
+}
+
+.floating-label {
+  position: absolute;
+  left: 10px; 
+  top: 10px;
+  transition: all 0.2s ease;
+  pointer-events: none; 
+}
+
+
+.visible-button{
+  height: 100%;
+  width: 30px;
+}

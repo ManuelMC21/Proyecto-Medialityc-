@@ -1,0 +1,46 @@
+@import '/src/styles/z-comun/variables.css';
+.entity-container{
+  width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  padding: 8px 20px;
+  display: flex;
+  gap: 14px;
+
+  transition: background-color 0.2s ease,  transform 0.2s ease;;
+}
+
+.entity-container:hover{
+  background-color: rgba(197, 197, 200, 0.275);
+  transform: scale(1.05);
+}
+
+.main-image{
+  height: 110px;
+  min-height: 110px;
+  max-height: 110px;
+  width: 110px;
+  min-width: 110px;
+  max-width: 110px;
+
+  overflow: hidden;
+
+  background-color: gray;
+  border-radius: 5px;
+}
+
+
+.img-main-image {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+p{
+  font-size: 13.8px;
+}
+h2{
+  font-size: var(--big-font-size);
+  margin-bottom: 10px;
+}

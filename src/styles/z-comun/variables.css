@@ -1,0 +1,33 @@
+
+:root {
+  /* letras */
+  --dark-letter-color: #031c2d;
+  --light-letter-color: #96959c;
+  --very-big-font-size: 20px;
+  --big-font-size: 16px;
+  --medium-font-size: 14px;
+  --small-font-size:12px;
+
+  /* colores */
+  --main-color: rgb(85, 77, 198);
+
+  /* tamanos barras */
+  --top-bar-height: 50px;
+  --left-bar-width: 350px;
+  --right-bar-width: 300px;
+
+  /* redondez */
+  --medium-radius: 30px;
+  --low-radius: 10px;
+}
+
+
+/*
+avances
+Rediceno total de la UI
+Le implemente transiciones
+Codigo muuucho mas limpio, revision completa
+Uso de variables de css
+Uso de navigation
+
+*/

@@ -1,3 +1,5 @@
+@import url('/src/styles/z-comun/variables.css');
+
 html, body {
   margin: 0;
   padding: 0;
@@ -5,8 +7,14 @@ html, body {
   color: rgb(34, 34, 34);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
 h1, h2 , p {
   margin: 0px;
+  cursor: default;
+}
+p{
+  font-size: var(--medium-font-size);
 }
 .content {
   position: relative; 
@@ -42,3 +50,4 @@ h1, h2 , p {
   align-items: center;
   justify-content: center;
 }
+
