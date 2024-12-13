@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import ExitButton from '../components/CompAux/ExitButton';
 import Field from '../components/CompAux/Field';
+import { register } from '../data/functions';
+import { datos } from '../data/functions';
+import { apiUrl } from '../data/functions';
 
 
 import '../styles/Login-Register/login-register.css'
@@ -37,7 +40,7 @@ function Register() {
         <div>
           <h1 className='title'>Crear Cuenta </h1>
           <div className='fields'>
-            <ExitButton 
+            <ExitButton
               handleClick={handleExit}
             />
             <Field
@@ -59,7 +62,7 @@ function Register() {
           </div>
         </div>
         <div className='button-container'>
-          <button className='full-button'> Registrar </button>
+          <button className='full-button' onClick={register}> Registrar </button>
           <button className='border-button line-button'> Iniciar sesion </button>
 
         </div>
