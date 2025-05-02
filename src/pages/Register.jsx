@@ -4,9 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import ExitButton from '../components/CompAux/ExitButton';
 import Field from '../components/CompAux/Field';
 import { register } from '../data/functions';
-import { datos } from '../data/functions';
-import { apiUrl } from '../data/functions';
-
 
 import '../styles/Login-Register/login-register.css'
 import '../styles/z-comun/buttons.css'
@@ -17,7 +14,7 @@ import '../styles/z-comun/buttons.css';
 
 function Register() {
   const [nombre, setNombre] = useState('');
-  const [Email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [contrasena, setContrasena] = useState('');
   const navigate = useNavigate();
 
@@ -33,6 +30,18 @@ function Register() {
   const handleContrasena = (e) => {
     setContrasena(e.target.value);
   };
+
+  const registerFunction = () => {
+    register({
+        "fullName": nombre,
+        "email": email,
+        "password": contrasena
+    })
+  }
+
+  const handleLogin = () => {
+    navigate('/login');
+  }
 
   return (
     <div className="container">
@@ -51,7 +60,7 @@ function Register() {
             <Field
               placeholder={"Email"}
               handleChange={handleEmail}
-              value={Email}
+              value={email}
             />
             <Field
               placeholder={"Contrasena"}
@@ -62,8 +71,8 @@ function Register() {
           </div>
         </div>
         <div className='button-container'>
-          <button className='full-button' onClick={register}> Registrar </button>
-          <button className='border-button line-button'> Iniciar sesion </button>
+          <button className='full-button' onClick={registerFunction}> Registrar </button>
+          <button className='border-button line-button' onClick={handleLogin}> Iniciar sesion </button>
 
         </div>
 

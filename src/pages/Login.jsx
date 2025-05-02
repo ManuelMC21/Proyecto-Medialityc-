@@ -4,22 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import ExitButton from '../components/CompAux/ExitButton';
 import Field from '../components/CompAux/Field';
 
+import { login } from '../data/functions';
+
 
 import '../styles/Login-Register/login-register.css'
 import '../styles/z-comun/buttons.css'
 
 
 function Login() {
-  const [nombre, setNombre] = useState('');
-  const [Email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [contrasena, setContrasena] = useState('');
   const navigate = useNavigate();
 
   const handleExit = () => {
     navigate('/');
-  };
-  const handleNombre = (e) => {
-    setNombre(e.target.value);
   };
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -28,6 +26,17 @@ function Login() {
     setContrasena(e.target.value);
   };
 
+  const loginFunction = () => {
+     login({
+         "email": email,
+         "password": contrasena
+     })
+     
+   }
+
+   const handleRegister = () => {
+    navigate('/register');
+   }
   return (
     <div className="container">
       <div className="content-container">
@@ -38,9 +47,9 @@ function Login() {
             handleClick={handleExit}
             />
             <Field
-              placeholder={"Nombre"}
-              handleChange={handleNombre}
-              value={nombre}
+              placeholder={"Email"}
+              handleChange={handleEmail}
+              value={email}
             />
 
             <Field
@@ -52,8 +61,9 @@ function Login() {
           </div>
         </div>
         <div className='button-container'>
-          <button className='full-button'> Iniciar sesion </button>
-          <button className='border-button line-button'> Registrar </button>
+          <button className='full-button'
+          onClick={loginFunction}> Iniciar sesion </button>
+          <button className='border-button line-button' onClick={handleRegister}> Registrar </button>
 
         </div>
         

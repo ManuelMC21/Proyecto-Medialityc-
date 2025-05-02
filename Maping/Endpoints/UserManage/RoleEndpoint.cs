@@ -25,5 +25,27 @@ public static class RoleEndpoint
             return Results.Ok($"Role {roleName} assigned");
         })
         .WithTags("Role");
+
+        app.MapDelete("/api/delete-role", async (string userId, string roleName, UserManager<ApplicationUser> userManager) =>
+        {
+
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return Results.NotFound("User not found");
+            }
+
+            if (await userManager.IsInRoleAsync(user, roleName))
+            {
+                var result = await userManager.RemoveFromRoleAsync(user, roleName);
+                if (!result.Succeeded)
+                {
+                    return Results.BadRequest(result.Errors);
+                }
+            }
+
+            return Results.Ok($"Role {roleName} removed");
+
+        }).WithTags("Role");
     }
 }

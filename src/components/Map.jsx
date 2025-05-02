@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, CircleMarker, useMapEvents, FeatureGroup, Polygon } from 'react-leaflet';
+import React, { useState, useRef, useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, FeatureGroup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-
-import '../styles/map-styles.css'
+import '../styles/map-styles.css';
 import L from 'leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import axios from 'axios';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -14,64 +14,83 @@ L.Icon.Default.mergeOptions({
     iconUrl: markerIcon,
     shadowUrl: markerShadow,
 });
-function Map({ setFormOpened }) {
-    const [position, setPosition] = useState([23.065709745023, -82.375883838068]);
-    const [rightClickPosition, setRightClickPosition] = useState([23.065709745023, -82.375883838068]);
 
-    const [visible, setVisible] = useState(false);
-    const [markers, setMarkers] = useState([]);
-    const [figures, setFigures] = useState([]);
-    const [currentPoints, setCurrentPoints] = useState([]);
-    const [constructorMode, setConstructorMode] = useState(false);
+function Map({ setFormOpened, formOpened, setMarkers, markers }) {
 
-    const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
+    const [position] = useState([23.065709745023, -82.375883838068]);
+    const [rightClickPosition, setRightClickPosition] = useState(null);
+    const [menuVisible, setMenuVisible] = useState(false);
+    const menuRef = useRef(null);
+
+    const loadEntities = async () => {
+        try {
+            const response = await axios.get('http://localhost:5009/api/entities');
+            const entities = response.data;
+    
+            const newMarkers = entities.map((entity, index) => ({
+                id: index + 1,
+                typeId: entity.entityTypeId,
+                position: [entity.latitude, entity.longitude],
+            }));
+    
+            setMarkers(newMarkers);
+            
+        } catch (error) {
+            console.error("Error al cargar entidades:", error);
+        }
+    };
+    
+
+    useEffect(() => {
+        loadEntities();
+    }, []);
+
+    
 
     const handleRightClick = (e) => {
-        setRightClickPosition(e.latlng);
+        if (!formOpened) {
+            const map = e.target;
+            const containerPoint = map.latLngToContainerPoint(e.latlng);
+            setRightClickPosition({
+                containerPoint,
+                latLng: e.latlng
+            });
+            setMenuVisible(true);
+        }
+
     };
 
-    const handleClick = (e) => {
-        if (constructorMode && !visible) {
-            alert(`Latitud: ${e.latlng.lat}, Longitud: ${e.latlng.lng}`);
-            const newPoint = [e.latlng.lat, e.latlng.lng];
-            setCurrentPoints((prevPoints) => [...prevPoints, newPoint]);
-        }
-    }
-
-    const handleOption2 = () => {
-        setConstructorMode(!constructorMode);
-        constructorMode ? alert('Constructor mode off') : alert("Constructor mode on");
-        if (!constructorMode) {
-            if (currentPoints.length > 0) {
-                setFigures((prev) => [...prev, currentPoints]);
-                setCurrentPoints([]);
-            }
-        }
+    const closeMenu = () => {
+        setMenuVisible(false);
     };
 
-    const handleOption1 = (e) => {
+    const handleOption1 = () => {
+        if (rightClickPosition) {
+            console.log("Añadido marcador");
+            const newMarkerPosition = {
+                id: null,
+                typeId: null,
+                position: [rightClickPosition.latLng.lat, rightClickPosition.latLng.lng],
+            };
+            setMarkers((prevMarkers) => [...prevMarkers, newMarkerPosition]);
+        }
+
         setFormOpened(true);
-        addMarker();
+        closeMenu();
     };
 
-    const addMarker = () => {
-        const newMarkerPosition = rightClickPosition;
-        setMarkers((prevMarkers) => [...prevMarkers, newMarkerPosition]);
-    }
-
-    const handleCircleMarkerDragEnd = (index) => (e) => {
-        e.target.closePopup(); // Cierra el popup si está abierto
-        const newPosition = [e.target.getLatLng().lat, e.target.getLatLng().lng];
-        const updatedPoints = [...currentPoints];
-        updatedPoints[index] = newPosition; // Actualizar la posición del punto arrastrado
-        setCurrentPoints(updatedPoints);
+    const handleClickOutsideMenu = (event) => {
+        if (menuVisible && menuRef.current && !menuRef.current.contains(event.target)) {
+            closeMenu();
+        }
     };
 
-    const handleCircleMarkerDragStart = (e) => {
-        e.target.on('drag', () => {
-            e.target.closePopup(); // Cierra el popup durante el arrastre
-        });
-    };
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutsideMenu);
+        return () => {
+            document.removeEventListener('click', handleClickOutsideMenu);
+        };
+    }, [menuVisible]);
 
     return (
         <MapContainer
@@ -83,122 +102,50 @@ function Map({ setFormOpened }) {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            <MapEventsHandler
-                handleRightClick={handleRightClick}
-                handleClick={handleClick}
-            />
-            <PopupMenu
-                action1={handleOption1}
-                action2={handleOption2}
-                setVisible={setVisible}
-                visible={visible} />
-
-            {figures.map((figure, index) => (
-                <Polygon key={`figure-${index}`} positions={figure} color="blue" />
-            ))}
-
-            {currentPoints.length > 0 && (
-                <>
-                    <Polygon positions={currentPoints} color="red" />
-                    {currentPoints.map((point, index) => (
-                        <CircleMarker
-                            key={`circle-marker-${index}`}
-                            center={point}
-                            radius={5}
-                            color="blue"
-                            className="leaflet-circle-marker"
-                            fillColor="blue"
-                            fillOpacity={0.5}
-                            draggable={true}
-                            eventHandlers={{
-                                dragend: handleCircleMarkerDragEnd(index),
-                                dragstart: handleCircleMarkerDragStart,
-                            }}
-                        >
-                            <Popup>
-                                Coordenadas: {point[0]}, {point[1]}
-                            </Popup>
-                        </CircleMarker>
-                    ))}
-                </>
-            )}
+            <MapEventsHandler handleRightClick={handleRightClick} />
 
             <FeatureGroup>
-                {markers.map((position, idx) => (
-                    <Marker className="mark" key={`marker-${idx}`} position={position}>
-                        <Popup className="mark-popup" >
-                        </Popup>
-                    </Marker>
-                ))}
-            </FeatureGroup>
+    {markers.map((marker, idx) => {
+        return (
+            <Marker key={`marker-${idx}`} position={marker.position}>
+                <Popup>
+                    {marker.id ? "Contenido del Popup" : "popup vacío"}
+                </Popup>
+            </Marker>
+        );
+    })}
+</FeatureGroup>
 
+
+
+            {menuVisible && rightClickPosition && (
+                <ContextMenu position={rightClickPosition.containerPoint} onClose={closeMenu} ref={menuRef}
+                    handleOption1={handleOption1} />
+            )}
         </MapContainer>
     );
 }
 
-const MapEventsHandler = ({ handleClick, handleRightClick }) => {
-    const map = useMapEvents({
+const MapEventsHandler = ({ handleRightClick }) => {
+    useMapEvents({
         contextmenu: handleRightClick,
-        click: handleClick,
     });
 
     return null;
 };
 
-const PopupMenu = ({ action1, action2, setVisible, visible }) => {
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const [isGrabbing, setIsGrabbing] = useState(false);
-
-    const handleContextMenu = (event) => {
-        event.preventDefault();
-        setPosition({ x: event.pageX, y: event.pageY });
-        setVisible(true);
-    };
-
-    const handleClick = () => {
-        if (visible) {
-            setVisible(false);
-        }
-    };
-
-    const handleMouseDown = () => {
-        setIsGrabbing(true);
-    };
-
-    const handleMouseUp = () => {
-        setIsGrabbing(false);
+const ContextMenu = React.forwardRef(({ position, onClose, handleOption1 }, ref) => {
+    const handleMenuClick = (e) => {
+        e.stopPropagation();
     };
 
     return (
-        <div className='custom-popup'
-            onClick={handleClick}
-            onContextMenu={handleContextMenu}
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-            style={{
-                cursor: visible ? 'context-menu' : (isGrabbing ? 'grabbing' : 'grab'),
-            }}
-        >
-            {visible && (
-                <div className="popup-container" style={{
-                    top: position.y - 60,
-                    left: position.x,
-                }}>
-                    <button onClick={() => {
-                        action1();
-                        setVisible(false);
-                    }}>Añadir Lugar</button>
-                    <button onClick={() => {
-                        action2();
-                        setVisible(false);
-                    }}>Dibujar figura</button>
-                </div>
-            )}
+        <div className="context-menu" style={{ left: position.x, top: position.y }} ref={ref} onClick={handleMenuClick}>
+            <ul>
+                <li onClick={handleOption1}>Añadir entidad</li>
+            </ul>
         </div>
     );
-};
-
-
-
+});
 
 export default Map;

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -35,6 +36,8 @@ builder.Services.AddSwaggerGen(options =>
             Array.Empty<string>()
         }
     });
+
+    options.OperationFilter<AddFileUploadParams>();
 });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -110,6 +113,7 @@ app.UseCors("Medialityc");
 app.UseDeveloperExceptionPage();
 app.UseHttpsRedirection();
 
+
 //Linking Endpoints
 app.MapProvinceEndpoints();
 app.MapDistrictEndpoints();
@@ -119,9 +123,18 @@ app.MapAutentificationEndpoints();
 app.MapEntityTypeEndPoints();
 app.MapRoleEndpoints();
 app.MapRestaurantEndpoints();
+app.MapImageEndpoints();
+app.MapFormEndpoints();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+    RequestPath = "/images"
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 await SeedRolesAsync(app.Services);
 

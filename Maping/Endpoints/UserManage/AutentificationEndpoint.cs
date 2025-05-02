@@ -9,10 +9,10 @@ public static class AutentificationEndpoint
     {
         app.MapPost("/api/register", async (UserManager<ApplicationUser> userManager, RegisterModel model) =>
         {
-            if (model.password != model.confirmPassword)
+            /*if (model.password != model.confirmPassword)
             {
                 return Results.BadRequest("Passwords must match");
-            }
+            }*/
 
             var user = new ApplicationUser
             {

@@ -8,6 +8,35 @@ public static class DistrictEndpoint
 {
     public static void MapDistrictEndpoints(this IEndpointRouteBuilder app)
     {
+
+        app.MapDelete("/api/district-delete", [Authorize(Roles = "Admin")] async (int id, AppDbContext db, HttpContext httpContext, UserManager<ApplicationUser> userManager) =>
+        {
+
+            var userId = httpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+            {
+                return Results.Unauthorized();
+            }
+
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null || !await userManager.IsInRoleAsync(user, "Admin"))
+            {
+                return Results.Forbid();
+            }
+
+            var districtToDelete = await db.Districts.FindAsync(id);
+            if (districtToDelete == null)
+            {
+                return Results.NotFound("District not found");
+            }
+
+            db.Districts.Remove(districtToDelete);
+            await db.SaveChangesAsync();
+
+            return Results.Ok("District deleted");
+
+        }).WithTags("District");
+
         app.MapPost("/api/districts", [Authorize(Roles = "Admin")] async (DistrictDto dto, AppDbContext db, HttpContext httpContext, UserManager<ApplicationUser> userManager) =>
         {
 

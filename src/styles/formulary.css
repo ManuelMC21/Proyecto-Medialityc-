@@ -3,7 +3,7 @@
 .formulary {
   margin-top: 50px;
   width: 400px;
-  height: 80%;
+  height: 600px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -205,3 +205,4 @@
   background-color: rgba(73, 73, 255, 0.096); 
   color: rgb(73, 73, 255); 
 }
+

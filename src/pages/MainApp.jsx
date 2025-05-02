@@ -9,26 +9,43 @@ import MoreInfoWindow from '../components/MoreInfoWindow/MoreInfoWindow.jsx';
 import LeftBar from '../components/LeftBarComp/LeftBar.jsx';
 import { restaurantes } from '../data/data.js'
 import RightBar from '../components/RightBar/RightBar.jsx';
-
+import Formulary from '../components/formulary.jsx';
 function MainApp() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
+
+  const [markers, setMarkers] = useState([]);
 
   const [searchInput, setSearchInput] = useState('');
 
   const [formOpened, setFormOpened] = useState(false);
   const [restaurantes, setRestaurantes] = useState([]);
 
+  const getContent = () => {
+    
+    axios.get('/').then(res =>{
+      console.log(res);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
+
   return (
     <>
+
+    
       <Map
         setFormOpened={setFormOpened}
+        markers={markers}
+        setMarkers={setMarkers}
+        formOpened={formOpened}
       />
       <div className="content">
         <TopBar
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
         />
+        
         <LeftBar
           selectedPlace={selectedPlace}
           setSelectedPlace={setSelectedPlace}
@@ -39,6 +56,13 @@ function MainApp() {
           <MoreInfoWindow
             place={selectedPlace} 
             setSelectedPlace={setSelectedPlace}/>
+        )}
+
+        {formOpened && (
+          <Formulary setFormOpened={setFormOpened}
+          setMarkers={setMarkers}
+          markers={markers}
+          />
         )}
 
       </div>

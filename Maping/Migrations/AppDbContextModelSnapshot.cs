@@ -123,6 +123,9 @@ namespace Maping.Migrations
                         .IsRequired()
                         .HasColumnType("geometry(Point, 4326)");
 
+                    b.Property<string>("ImagesUrl")
+                        .HasColumnType("text");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("text");
@@ -153,6 +156,52 @@ namespace Maping.Migrations
                     b.HasKey("EntityTypeId");
 
                     b.ToTable("Types");
+                });
+
+            modelBuilder.Entity("Form", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Forms");
+                });
+
+            modelBuilder.Entity("FormField", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FormId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsRequired")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormId");
+
+                    b.ToTable("Fields");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -381,6 +430,17 @@ namespace Maping.Migrations
                     b.Navigation("user");
                 });
 
+            modelBuilder.Entity("FormField", b =>
+                {
+                    b.HasOne("Form", "Form")
+                        .WithMany("Fields")
+                        .HasForeignKey("FormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Form");
+                });
+
             modelBuilder.Entity("Municipality", b =>
                 {
                     b.HasOne("Province", "Province")
@@ -422,6 +482,11 @@ namespace Maping.Migrations
             modelBuilder.Entity("EntityType", b =>
                 {
                     b.Navigation("Entities");
+                });
+
+            modelBuilder.Entity("Form", b =>
+                {
+                    b.Navigation("Fields");
                 });
 
             modelBuilder.Entity("Municipality", b =>
